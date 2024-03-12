@@ -14,7 +14,9 @@ const SplashScreen = () => {
     }, [])
 
     return (
-        <View style={styles.container}>
+        <View 
+        testID={"view_container"}
+        style={styles.container}>
             <Text style={{
                 color: primary,
                 fontSize: scaledVal(25),
