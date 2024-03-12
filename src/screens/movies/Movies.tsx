@@ -6,6 +6,8 @@ import useMovies from "../../hooks/movies/useMovies";
 import { Movie, MovieCategory } from "../../types/Movies";
 import { TouchableOpacity } from "react-native";
 import MovieCard from "../../components/movies/MovieCard";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
+import { RootStackType } from "../../navigation/RootStack";
 const Movies = () => {
   const { movies, loading, error, category, setCategory, getMoreMovies } = useMovies()
   const categories = [
@@ -26,6 +28,7 @@ const Movies = () => {
       value: "upcoming"
     }
   ]
+  const navigation = useNavigation<NavigationProp<RootStackType,"Movies">>()
   const renderMovies = (movie: Movie, index: number) => {
     return (
       <MovieCard
@@ -42,6 +45,7 @@ const Movies = () => {
           size={20}
         />
         <Fontisto
+          onPress={()=>navigation.navigate("Search")}
           name="search"
           color={white}
           size={20}

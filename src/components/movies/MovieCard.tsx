@@ -18,16 +18,30 @@ const MovieCard = (props: MovieCardProps) => {
             borderRadius: scaledVal(15),
             margin: scaledVal(5)
         }}>
+            <View>
             <Image
                 source={{ uri: `${MEDIA_BASE_URL + movie.poster_path}` }}
                 style={{
                     backgroundColor: "green",
-                    height: 200,
+                    height: scaledVal(200),
                     resizeMode: "cover",
                     borderRadius: 15,
                     overflow: "hidden"
                 }}
             />
+            <View style={{
+                position:"absolute",
+                padding:scaledVal(5),
+                top: scaledVal(172),
+                alignSelf:"flex-end",
+                borderRadius:scaledVal(20),
+                backgroundColor:"purple"
+            }}>
+                <Text style={{
+                    color: white
+                }}>{movie.vote_average.toFixed(1)}</Text>
+            </View>
+            </View>
             <View>
                 <Text
                     numberOfLines={2}
@@ -36,12 +50,7 @@ const MovieCard = (props: MovieCardProps) => {
                         fontSize: scaledVal(12),
 
                     }}>{movie.title}</Text>
-                    <Text style={{
-                        color: white,
-                        fontSize: scaledVal(12)
-                    }}>
-                        {movie.vote_average}
-                    </Text>
+        
                     <Text style={{
                         color: white,
                         fontSize: scaledVal(12)
