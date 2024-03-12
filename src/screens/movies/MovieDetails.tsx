@@ -70,6 +70,7 @@ const MovieDetails = () =>
                 movie && 
                 <View style={{
                     flex:1,
+        
                 }}>
                     <View>
                     <Image
@@ -80,18 +81,17 @@ const MovieDetails = () =>
                     }}
                     />
                     </View>
-            
                     <Text style={{
                         color: white,
+                        marginVertical:10,
                         alignSelf:"center",
                         textAlign:"center",
-                        textDecorationLine:"underline",
                         fontWeight:"bold",
                         fontSize: scaledVal(25)
                     }}>{movie.title}</Text>
                      <View style={{
                         flexDirection:"row",
-                        alignSelf:'flex-end',
+                        alignSelf:"center",
                         alignItems:'center',
                         marginVertical:scaledVal(10)
                     }}>

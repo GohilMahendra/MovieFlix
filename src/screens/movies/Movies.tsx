@@ -1,18 +1,19 @@
 import { FlatList, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native"
-import { black, red, white } from "../../globals/colors"
-import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import { black, primary, white } from "../../globals/colors"
 import Fontisto from "react-native-vector-icons/Fontisto";
 import useMovies from "../../hooks/movies/useMovies";
-import { Movie, MovieCategory } from "../../types/Movies";
+import { Category, Movie, MovieCategory } from "../../types/Movies";
 import { TouchableOpacity } from "react-native";
 import MovieCard from "../../components/movies/MovieCard";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { RootStackType } from "../../navigation/RootStack";
 import { scaledVal } from "../../globals/utilities";
 import { APP_NAME } from "../../globals/constants";
+import { useRef } from "react";
 const Movies = () => {
-  const { movies, loading, error, category, setCategory, getMoreMovies } = useMovies()
-  const categories = [
+  const { movies, category, setCategory, getMoreMovies } = useMovies()
+  const list_ref = useRef<FlatList | null>(null)
+  const categories:Category[] = [
     {
       label: "Now Playing",
       value: "now_playing"
@@ -41,6 +42,12 @@ const Movies = () => {
       />
     )
   }
+
+  const changeCategory = (selected_category: MovieCategory) => {
+    list_ref.current?.scrollToOffset({ animated: true, offset: 0 });
+    setCategory(selected_category as MovieCategory)
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
@@ -62,7 +69,7 @@ const Movies = () => {
             categories.map((type, index) => {
               return (
                 <TouchableOpacity
-                  onPress={() => setCategory(type.value as MovieCategory)}
+                  onPress={() => changeCategory(type.value)}
                   style={[styles.tab, {
                     backgroundColor: (category == type.value) ? white : black,
                   }]}>
@@ -76,7 +83,9 @@ const Movies = () => {
         </ScrollView>
       </View>
       <FlatList
+        ref={ref => list_ref.current = ref}
         data={movies}
+        extraData={category}
         numColumns={3}
         onEndReached={() => getMoreMovies()}
         keyExtractor={item => item.id.toString()}
@@ -107,8 +116,9 @@ const styles = StyleSheet.create({
   },
   txtHeader:
   {
+    fontWeight: "800",
     fontSize: scaledVal(20),
-    color: red
+    color: primary
   },
   tab:
   {

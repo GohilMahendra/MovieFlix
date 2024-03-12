@@ -1,4 +1,4 @@
-import { Dimensions, FlatList, SafeAreaView, StyleSheet, Text, TextInput, View } from "react-native"
+import { Dimensions, FlatList, RefreshControl, SafeAreaView, StyleSheet, Text, TextInput, View } from "react-native"
 import { scaledVal } from "../../globals/utilities"
 import Fontisto from "react-native-vector-icons/Fontisto"
 import { black, matt_black, white } from "../../globals/colors"
@@ -8,16 +8,16 @@ import { Movie } from "../../types/Movies"
 import { NavigationProp, useNavigation } from "@react-navigation/native"
 import { RootStackType } from "../../navigation/RootStack"
 import EmptyContainer from "../../components/movies/EmptyContainer"
-const { fontScale,height,width } = Dimensions.get("screen")
+const { fontScale, height, width } = Dimensions.get("screen")
 const Search = () => {
-    const { searchTerm, setSearchTerm, movies } = useSearch()
+    const { loading,searchTerm, setSearchTerm, movies} = useSearch()
     const navigation = useNavigation<NavigationProp<RootStackType, "Search">>()
     const renderMovies = (movie: Movie, index: number) => {
         return (
             <MovieCard
                 movie={movie}
-                onMoviePress={(movie_id:number)=>
-                    navigation.navigate("MovieDetails",{ movie_id: movie_id})}
+                onMoviePress={(movie_id: number) =>
+                    navigation.navigate("MovieDetails", { movie_id: movie_id })}
             />
         )
     }
@@ -38,10 +38,13 @@ const Search = () => {
             </View>
 
             <FlatList
+                refreshControl={<RefreshControl
+                refreshing={loading}
+                />}
                 data={movies}
                 ListEmptyComponent={() => (
-                    searchTerm.length > 0 && 
-                    <EmptyContainer/>
+                    searchTerm.length > 0 &&
+                    <EmptyContainer />
                 )}
                 numColumns={3}
                 // onEndReached={() => getMoreMovies()}
@@ -54,10 +57,10 @@ const Search = () => {
 export default Search
 const styles = StyleSheet.create({
     container:
-    { 
-        flex: 1, 
+    {
+        flex: 1,
         backgroundColor: black
-     },
+    },
     header:
     {
         padding: scaledVal(10),

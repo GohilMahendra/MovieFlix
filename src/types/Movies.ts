@@ -15,6 +15,11 @@ export type Movie = {
     vote_count: number;
 };
 
+export interface Category {
+    label: string;
+    value: MovieCategory;
+  }
+
 export type DateRange = {
     maximum: string;
     minimum: string;

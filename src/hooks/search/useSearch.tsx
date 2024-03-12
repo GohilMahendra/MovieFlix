@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { ApiResponse, Movie } from "../../types/Movies"
 import { searchMovies } from "../../apis/MovieApi"
+import { Alert } from "react-native"
 
 const useSearch = () => {
     const [loading, setLoading] = useState<boolean>(false)
@@ -9,19 +10,19 @@ const useSearch = () => {
     const [searchTerm, setSearchTerm] = useState<string>("")
     const getSearchResult = async () => {
         try {
+            setLoading(true)
             const response = await searchMovies(searchTerm)
-            if (response.data) {
-                const apiResponse = response.data as ApiResponse
-                const results = apiResponse.results
-                setMovies(results)
-            }
-            else {
-                console.log(response.data)
-            }
+            const apiResponse = response as ApiResponse
+            const results = apiResponse.results
+            setMovies(results)
 
+            setLoading(false)
         }
-        catch (err) {
+        catch (err: any) {
+            Alert.alert("Error", JSON.stringify(err))
             console.log(err)
+            setLoading(false)
+            setError(error)
         }
     }
     useEffect(() => {
@@ -32,6 +33,7 @@ const useSearch = () => {
     }, [searchTerm])
 
     return {
+        loading,
         movies,
         searchTerm,
         setSearchTerm
