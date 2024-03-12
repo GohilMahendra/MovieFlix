@@ -13,7 +13,11 @@ const RootStack = () =>
     const RootStackNavigation = createNativeStackNavigator()
     return(
         <NavigationContainer>
-            <RootStackNavigation.Navigator>
+            <RootStackNavigation.Navigator
+            screenOptions={{
+                headerShown: false
+            }}
+            >
                 <RootStackNavigation.Screen
                 name="SplashScreen"
                 component={SplashScreen}
