@@ -3,11 +3,15 @@ import { NavigationContainer } from "@react-navigation/native"
 import SplashScreen from "../screens/splash/SplashScreen";
 import Movies from "../screens/movies/Movies";
 import Search from "../screens/search/Search";
+import MovieDetails from "../screens/movies/MovieDetails";
 export type RootStackType =
     {
         SplashScreen: undefined,
         Movies: undefined,
-        Search: undefined
+        Search: undefined,
+        MovieDetails:{
+            movie_id: number
+        }
     }
 
 const RootStack = () => {
@@ -30,6 +34,10 @@ const RootStack = () => {
                 <RootStackNavigation.Screen
                     name="Search"
                     component={Search}
+                />
+                 <RootStackNavigation.Screen
+                    name="MovieDetails"
+                    component={MovieDetails}
                 />
             </RootStackNavigation.Navigator>
         </NavigationContainer>

@@ -1,26 +1,15 @@
 import { useEffect, useState } from "react"
 import { ApiResponse, Movie } from "../../types/Movies"
-import { BASE_URL } from "../../globals/constants"
-import axios from "axios"
-import { API_TOKEN } from "../../globals/secrets"
+import { searchMovies } from "../../apis/MovieApi"
 
-const useSearch = () =>
-{
-    const [loading,setLoading] = useState<boolean>(false)
-    const [movies,setMovies]  = useState<Movie[]>([])
-    const [error,setError] = useState<string | null>(null)
-    const [searchTerm,setSearchTerm] = useState<string>("")
-    const getSearchResult = async() =>
-    {
-        try
-        {
-            const quary = `${BASE_URL}search/movie?query=${searchTerm}&include_adult=false&language=en-US&page=1`
-            const response = await axios.get(quary, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `bearer ${API_TOKEN}`
-                }
-            })
+const useSearch = () => {
+    const [loading, setLoading] = useState<boolean>(false)
+    const [movies, setMovies] = useState<Movie[]>([])
+    const [error, setError] = useState<string | null>(null)
+    const [searchTerm, setSearchTerm] = useState<string>("")
+    const getSearchResult = async () => {
+        try {
+            const response = await searchMovies(searchTerm)
             if (response.data) {
                 const apiResponse = response.data as ApiResponse
                 const results = apiResponse.results
@@ -30,19 +19,17 @@ const useSearch = () =>
                 console.log(response.data)
             }
 
-
         }
-        catch(err)
-        {
-
+        catch (err) {
+            console.log(err)
         }
     }
-    useEffect(()=>{
-        if(!searchTerm)
-        return
+    useEffect(() => {
+        if (!searchTerm)
+            return
 
         getSearchResult()
-    },[searchTerm])
+    }, [searchTerm])
 
     return {
         movies,

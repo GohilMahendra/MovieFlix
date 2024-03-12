@@ -3,6 +3,7 @@ import { ApiResponse, Movie, MovieCategory } from "../../types/Movies"
 import { BASE_URL } from "../../globals/constants"
 import axios from "axios"
 import { API_TOKEN } from "../../globals/secrets"
+import { fecthMovies } from "../../apis/MovieApi"
 
 const useMovies = () => {
     const [movies, setMovies] = useState<Movie[]>([])
@@ -13,24 +14,10 @@ const useMovies = () => {
     const [category, setCategory] = useState<MovieCategory>("now_playing")
     const getMovies = async () => {
         try {
-            const quary = BASE_URL + `movie/${category}?language=en-US&page=1`
-            console.log(quary)
-            const response = await axios.get(quary, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `bearer ${API_TOKEN}`
-                }
-            })
-            if (response.data) {
-                const apiResponse = response.data as ApiResponse
-                const results = apiResponse.results
-                setMovies(results)
-                setTotalPages(apiResponse.total_pages)
-            }
-            else {
-                console.log(response.data)
-            }
-
+            const response = await fecthMovies(category, 1)
+            const { results, page, total_pages } = response as ApiResponse
+            setMovies(results)
+            setTotalPages(totalPages)
         }
         catch (err) {
             console.log(err)
@@ -39,26 +26,14 @@ const useMovies = () => {
     const getMoreMovies = async () => {
         try {
 
-            if(currentPage >= totalPages)
-            {
+            if (currentPage >= totalPages) {
                 return
             }
-            const quary = BASE_URL + `movie/${category}?language=en-US&page=${currentPage + 1}`
-            const response = await axios.get(quary, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `bearer ${API_TOKEN}`
-                }
-            })
-            if (response.data) {
-                const apiResponse = response.data as ApiResponse
-                const results = apiResponse.results
-                setMovies((prevMovies)=>[...prevMovies,...results])
-                setCurrentPage((prevCurrent)=> prevCurrent+1)
-            }
-            else {
-                console.log(response.data)
-            }
+            const nextPage = currentPage + 1
+            const response = await fecthMovies(category, nextPage)
+            const { results, page, total_pages } = response as ApiResponse
+            setMovies((prevResults) => [...prevResults, ...results])
+            setCurrentPage((prevPage) => prevPage + 1)
         }
         catch (err) {
             console.log(err)
@@ -69,7 +44,7 @@ const useMovies = () => {
         getMovies()
     }, [category])
 
-    return { movies, loading, error, category, setCategory,getMoreMovies }
+    return { movies, loading, error, category, setCategory, getMoreMovies }
 
 }
 export default useMovies

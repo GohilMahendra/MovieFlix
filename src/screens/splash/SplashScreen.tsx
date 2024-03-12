@@ -1,8 +1,10 @@
 import { SafeAreaView, StyleSheet, Text, View } from "react-native"
-import { black, red } from "../../globals/colors"
+import { black, primary, red } from "../../globals/colors"
 import { useEffect } from "react"
 import { NavigationProp, useNavigation } from "@react-navigation/native"
 import { RootStackType } from "../../navigation/RootStack"
+import { scaledVal } from "../../globals/utilities"
+import { APP_NAME } from "../../globals/constants"
 const SplashScreen = () => {
     const navigation = useNavigation<NavigationProp<RootStackType, "Movies">>()
     useEffect(() => {
@@ -14,10 +16,10 @@ const SplashScreen = () => {
     return (
         <View style={styles.container}>
             <Text style={{
-                color: red,
-                fontSize: 20,
+                color: primary,
+                fontSize: scaledVal(25),
                 fontWeight: "bold"
-            }}>MovieFlix</Text>
+            }}>{APP_NAME}</Text>
         </View>
 
     )

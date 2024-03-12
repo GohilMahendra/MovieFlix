@@ -1,5 +1,5 @@
 import { FlatList, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native"
-import { black, white } from "../../globals/colors"
+import { black, red, white } from "../../globals/colors"
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import Fontisto from "react-native-vector-icons/Fontisto";
 import useMovies from "../../hooks/movies/useMovies";
@@ -8,6 +8,8 @@ import { TouchableOpacity } from "react-native";
 import MovieCard from "../../components/movies/MovieCard";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { RootStackType } from "../../navigation/RootStack";
+import { scaledVal } from "../../globals/utilities";
+import { APP_NAME } from "../../globals/constants";
 const Movies = () => {
   const { movies, loading, error, category, setCategory, getMoreMovies } = useMovies()
   const categories = [
@@ -28,24 +30,24 @@ const Movies = () => {
       value: "upcoming"
     }
   ]
-  const navigation = useNavigation<NavigationProp<RootStackType,"Movies">>()
+  const navigation = useNavigation<NavigationProp<RootStackType, "Movies">>()
   const renderMovies = (movie: Movie, index: number) => {
     return (
       <MovieCard
         movie={movie}
+        onMoviePress={(movie_id: number) => navigation.navigate("MovieDetails", {
+          movie_id: movie_id
+        })}
       />
     )
   }
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: black }}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <FontAwesome5
-          name="chevron-left"
-          color={white}
-          size={20}
-        />
+        <View />
+        <Text style={styles.txtHeader}>{APP_NAME}</Text>
         <Fontisto
-          onPress={()=>navigation.navigate("Search")}
+          onPress={() => navigation.navigate("Search")}
           name="search"
           color={white}
           size={20}
@@ -86,6 +88,12 @@ const Movies = () => {
 export default Movies
 
 const styles = StyleSheet.create({
+  container:
+  {
+    flex: 1,
+    backgroundColor: black
+  },
+
   header:
   {
     flexDirection: "row",
@@ -96,6 +104,11 @@ const styles = StyleSheet.create({
   tabContainer:
   {
     flexDirection: "row"
+  },
+  txtHeader:
+  {
+    fontSize: scaledVal(20),
+    color: red
   },
   tab:
   {
