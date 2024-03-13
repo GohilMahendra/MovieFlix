@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     },
     inputSearch:
     {
-        width: "80%",
+        width: "85%",
         borderRadius: scaledVal(10),
         marginLeft: scaledVal(10),
         padding: scaledVal(10),

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { ApiResponse, Movie } from "../../types/Movies"
 import { searchMovies } from "../../apis/MovieApi"
 import { Alert } from "react-native"
-
+import { debounce } from "lodash";
 const useSearch = () => {
     const [loading, setLoading] = useState<boolean>(false)
     const [movies, setMovies] = useState<Movie[]>([])
@@ -19,17 +19,20 @@ const useSearch = () => {
             setLoading(false)
         }
         catch (err: any) {
-            Alert.alert("Error", JSON.stringify(err))
+            Alert.alert("Error", err as string)
             console.log(err)
             setLoading(false)
             setError(error)
         }
     }
+
+    const debouncedGetSearchResult = debounce(getSearchResult, 500);
     useEffect(() => {
         if (!searchTerm)
             return
+        debouncedGetSearchResult()
 
-        getSearchResult()
+        return(()=>debouncedGetSearchResult.cancel())
     }, [searchTerm])
 
     return {
