@@ -804,7 +804,7 @@ export const apiResponseNowPlaying2 =
             "vote_count": 1071
         }
     ],
-    "total_pages": 173,
+    "total_pages": 2,
     "total_results": 3459
 }
 

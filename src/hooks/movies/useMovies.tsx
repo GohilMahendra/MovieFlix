@@ -1,8 +1,5 @@
 import { useEffect, useState } from "react"
 import { ApiResponse, Movie, MovieCategory } from "../../types/Movies"
-import { BASE_URL } from "../../globals/constants"
-import axios from "axios"
-import { API_TOKEN } from "../../globals/secrets"
 import { fetchMovies } from "../../apis/MovieApi"
 import { Alert } from "react-native"
 
