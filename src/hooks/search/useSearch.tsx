@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { ApiResponse, Movie } from "../../types/Movies"
 import { searchMovies } from "../../apis/MovieApi"
 import { Alert } from "react-native"
@@ -9,7 +9,6 @@ const useSearch = () => {
     const [error, setError] = useState<string | null>(null)
     const [searchTerm, setSearchTerm] = useState<string>("")
     const getSearchResult = async () => {
-        console.log("Search result called ... yeah")
         try {
             setLoading(true)
             const response = await searchMovies(searchTerm)
@@ -19,14 +18,14 @@ const useSearch = () => {
             setLoading(false)
         }
         catch (err: any) {
-            Alert.alert("Error", err as string)
-            console.log(err)
+            Alert.alert("Error","Api Error")
             setLoading(false)
             setError(error)
         }
     }
 
-    const debouncedGetSearchResult = debounce(getSearchResult, 500);
+    const debouncedGetSearchResult = debounce(getSearchResult, 1000);
+
     useEffect(() => {
         if (!searchTerm)
             return

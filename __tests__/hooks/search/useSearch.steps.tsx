@@ -1,5 +1,5 @@
 import { renderHook } from "@testing-library/react-hooks"
-import { act, render } from "@testing-library/react-native"
+import { act, render, waitFor } from "@testing-library/react-native"
 import useSearch from "../../../src/hooks/search/useSearch"
 
 jest.mock("../../../src/apis/MovieApi",()=>{
@@ -8,6 +8,9 @@ jest.mock("../../../src/apis/MovieApi",()=>{
         searchMovies: jest.fn().mockResolvedValue(apiSerachResultResponse)
     }
 })
+jest.useFakeTimers()
+jest.runAllTimers()
+
 describe("useSearch hooks ...",()=>{
     it("search will be called on change of search term",async()=>{
         const { result } = renderHook(()=>useSearch())
@@ -15,7 +18,10 @@ describe("useSearch hooks ...",()=>{
         await act(async()=>{
             result.current.setSearchTerm("die")
         })
-
-        expect(result.current.movies.length).toBe(20)
+        expect(result.current.searchTerm).toBe("die")
+        jest.advanceTimersByTime(2000)
+        await waitFor(async()=>{
+            expect(result.current.movies.length).toBe(20)
+        })
     })
 })

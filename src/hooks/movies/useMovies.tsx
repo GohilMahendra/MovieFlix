@@ -19,9 +19,9 @@ const useMovies = () => {
             setTotalPages(total_pages)
             setLoading(false)
         }
-        catch (err) {
+        catch (err: any) {
             setLoading(false)
-            Alert.alert("Error",JSON.stringify(err))
+            Alert.alert("Error","Api Error")
         }
     }
     const getMoreMovies = async () => {
@@ -37,7 +37,7 @@ const useMovies = () => {
             setCurrentPage((prevPage) => prevPage + 1)
         }
         catch (err) {
-            Alert.alert("Error",JSON.stringify(err))
+            Alert.alert("Error","Api Error")
         }
     }
 

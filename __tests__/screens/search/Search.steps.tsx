@@ -1,4 +1,4 @@
-import { act, fireEvent, render, screen } from "@testing-library/react-native"
+import { act, fireEvent, render, screen, waitFor } from "@testing-library/react-native"
 import Search from "../../../src/screens/search/Search"
 import MovieCard from "../../../src/components/movies/MovieCard";
 
@@ -34,9 +34,11 @@ describe("search screen ...",()=>{
         await act(async()=>{
             fireEvent(input,"changeText","og")
         })
-        jest.advanceTimersByTime(500)
+        jest.advanceTimersByTime(1000)
         const list = screen.getByTestId("list_search")
-        expect(list.props.data.length).toBe(20)
+          await waitFor(async()=>{
+            expect(list.props.data.length).toBe(20)
+        })
     })
 
     it("I can press on the result will call navigate to other screen",async()=>{
@@ -47,13 +49,15 @@ describe("search screen ...",()=>{
             fireEvent(input,"changeText","og")
         })
         jest.advanceTimersByTime(500)
-        const allCards = screen.root.findAllByType(MovieCard);
+        await waitFor(async()=>{
+            const allCards = screen.root.findAllByType(MovieCard);
 
-        const card = allCards[0]
-        await act(async()=>{
-            card.props.onMoviePress(100)
+            const card = allCards[0]
+            await act(async()=>{
+                card.props.onMoviePress(100)
+            })
+            expect(mockNavigate).toHaveBeenCalled()
         })
-        expect(mockNavigate).toHaveBeenCalled()
     })
 
     it("I can go back by pressing back button",()=>{

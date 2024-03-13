@@ -23,7 +23,7 @@ const useWatchlist = () =>
         {
             setLoading(false)
             setError(JSON.stringify(error))
-            Alert.alert("Error",error as string)
+            Alert.alert("Error","Api Error")
         }
     }
 
