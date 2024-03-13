@@ -3,7 +3,7 @@ import { ApiResponse, Movie, MovieCategory } from "../../types/Movies"
 import { BASE_URL } from "../../globals/constants"
 import axios from "axios"
 import { API_TOKEN } from "../../globals/secrets"
-import { fecthMovies } from "../../apis/MovieApi"
+import { fetchMovies } from "../../apis/MovieApi"
 import { Alert } from "react-native"
 
 const useMovies = () => {
@@ -15,7 +15,7 @@ const useMovies = () => {
     const [category, setCategory] = useState<MovieCategory>("now_playing")
     const getMovies = async () => {
         try {
-            const response = await fecthMovies(category, 1)
+            const response = await fetchMovies(category, 1)
             const { results, page, total_pages } = response as ApiResponse
             setMovies(results)
             setTotalPages(total_pages)
@@ -31,7 +31,7 @@ const useMovies = () => {
                 return
             }
             const nextPage = currentPage + 1
-            const response = await fecthMovies(category, nextPage)
+            const response = await fetchMovies(category, nextPage)
             const { results } = response as ApiResponse
             setMovies((prevResults) => [...prevResults, ...results])
             setCurrentPage((prevPage) => prevPage + 1)

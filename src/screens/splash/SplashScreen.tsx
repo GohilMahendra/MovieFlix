@@ -1,5 +1,5 @@
-import { SafeAreaView, StyleSheet, Text, View } from "react-native"
-import { black, primary, red } from "../../globals/colors"
+import {  StyleSheet, Text, View } from "react-native"
+import { black, primary } from "../../globals/colors"
 import { useEffect } from "react"
 import { NavigationProp, useNavigation } from "@react-navigation/native"
 import { RootStackType } from "../../navigation/RootStack"
@@ -14,16 +14,12 @@ const SplashScreen = () => {
     }, [])
 
     return (
-        <View 
-        testID={"view_container"}
-        style={styles.container}>
-            <Text style={{
-                color: primary,
-                fontSize: scaledVal(25),
-                fontWeight: "bold"
-            }}>{APP_NAME}</Text>
+        <View
+            testID={"view_container"}
+            style={styles.container}
+        >
+            <Text style={styles.txt_title}>{APP_NAME}</Text>
         </View>
-
     )
 }
 export default SplashScreen
@@ -36,5 +32,11 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center"
     },
+    txt_title:
+    {
+        color: primary,
+        fontSize: scaledVal(35),
+        fontWeight: "bold"
+    }
 
 })

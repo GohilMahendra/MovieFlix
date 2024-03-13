@@ -3,7 +3,7 @@ import { BASE_URL } from "../globals/constants";
 import { MovieCategory } from "../types/Movies";
 import { API_TOKEN } from "../globals/secrets";
 
-export const fecthMovies = async (movie_category: MovieCategory, page: number = 1) => {
+export const fetchMovies = async (movie_category: MovieCategory, page: number = 1) => {
     try {
         const quary = BASE_URL + `movie/${movie_category}?language=en-US&page=${page}`
         const response = await axios.get(quary, {

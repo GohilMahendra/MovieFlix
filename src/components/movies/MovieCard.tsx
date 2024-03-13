@@ -15,6 +15,7 @@ const MovieCard = (props: MovieCardProps) => {
     const { movie, onMoviePress } = props
     return (
         <TouchableOpacity
+            testID={"btn_navigate"}
             onPress={() => onMoviePress(movie.id)}
             style={styles.container}>
             <View>

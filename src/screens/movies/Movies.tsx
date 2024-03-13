@@ -74,6 +74,7 @@ const Movies = () => {
                     backgroundColor: (category == type.value) ? white : black,
                   }]}>
                   <Text style={{
+                    fontWeight:"bold",
                     color: (category == type.value) ? black : white,
                   }}>{type.label}</Text>
                 </TouchableOpacity>
@@ -122,11 +123,11 @@ const styles = StyleSheet.create({
   },
   tab:
   {
-    padding: 10,
-    margin: 10,
+    padding: scaledVal(10),
+    margin: scaledVal(10),
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 10,
+    borderRadius: scaledVal(5),
     borderColor: white,
     borderWidth: 0.2
   }
