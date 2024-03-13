@@ -1,0 +1,1 @@
+export const API_TOKEN = "PASTE_TOKEN_HERE"
