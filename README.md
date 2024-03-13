@@ -58,6 +58,26 @@ yarn ios
     <td align="center">
       <img src="screenshots/Simulator Screenshot - Iphone 14 - 2024-03-14 at 02.04.30.png" alt="Screenshot 5" width="200" />
     </td>
+    <td align="center">
+      <img src="screenshots/Simulator Screenshot - Iphone 14 - 2024-03-14 at 02.04.39.png" alt="Screenshot 6" width="200" />
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="screenshots/Simulator Screenshot - Iphone 14 - 2024-03-14 at 02.04.42.png" alt="Screenshot 7" width="200" />
+    </td>
+    <td align="center">
+      <img src="screenshots/Simulator Screenshot - Iphone 14 - 2024-03-14 at 02.04.53.png" alt="Screenshot 8" width="200" />
+    </td>
+    <td align="center">
+      <img src="screenshots/Simulator Screenshot - Iphone 14 - 2024-03-14 at 02.04.58.png" alt="Screenshot 9" width="200" />
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="screenshots/Simulator Screenshot - Iphone 14 - 2024-03-14 at 02.05.08.png" alt="Screenshot 10" width="200" />
+    </td>
     <!-- Add additional screenshots here -->
   </tr>
 </table>
+
