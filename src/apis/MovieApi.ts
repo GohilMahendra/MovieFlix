@@ -37,7 +37,6 @@ export const searchMovies = async (searchTerm: string) => {
               return response.data
             }
             else {
-                console.log(response.data)
                 throw new Error(response.data)
             }
     }

@@ -24,7 +24,6 @@ const MovieDetails = () => {
         const watchlistMovies = await AsyncStorage.getItem("watchlist_movies")
         const parsedMovies = (watchlistMovies) ? JSON.parse(watchlistMovies) : []
         const currentMovie = parsedMovies.find((child: Movie) => child.id === movie!.id)
-        console.log("this movie is in watch list")
         if (currentMovie) {
             setIsInWatchList(true)
         }
