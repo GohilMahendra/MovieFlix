@@ -17,6 +17,11 @@ A OTT app for curated korean dramas
 
 # Getting Started
 
+### secrets
+- need a token to start the project get the token from 
+https://developer.themoviedb.org/reference/movie-now-playing-list
+- replace the token placeholder in src/globals/secrets.ts
+
 ### For Android
 
 ```bash
