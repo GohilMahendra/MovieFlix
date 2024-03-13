@@ -33,11 +33,7 @@ const Search = () => {
                 <ActivityIndicator
                 color={white}
                 size={"large"}
-                style={{
-                    position:"absolute",
-                    alignSelf:'center',
-                    marginTop: height/2 - scaledVal(20)
-                }}
+                style={styles.loader}
                 />
             }
             {/* header section starts */}
@@ -98,5 +94,11 @@ const styles = StyleSheet.create({
         color: white,
         backgroundColor: matt_black
     },
+    loader:
+    {
+        position:"absolute",
+        alignSelf:'center',
+        marginTop: height/2 - scaledVal(20)
+    }
 
 })  

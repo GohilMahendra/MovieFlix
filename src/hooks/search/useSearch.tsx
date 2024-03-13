@@ -9,13 +9,13 @@ const useSearch = () => {
     const [error, setError] = useState<string | null>(null)
     const [searchTerm, setSearchTerm] = useState<string>("")
     const getSearchResult = async () => {
+        console.log("Search result called ... yeah")
         try {
             setLoading(true)
             const response = await searchMovies(searchTerm)
             const apiResponse = response as ApiResponse
             const results = apiResponse.results
             setMovies(results)
-
             setLoading(false)
         }
         catch (err: any) {
@@ -30,8 +30,8 @@ const useSearch = () => {
     useEffect(() => {
         if (!searchTerm)
             return
-        debouncedGetSearchResult()
 
+        debouncedGetSearchResult()
         return(()=>debouncedGetSearchResult.cancel())
     }, [searchTerm])
 

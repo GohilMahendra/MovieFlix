@@ -2,12 +2,13 @@ import { FlatList, RefreshControl, SafeAreaView, StyleSheet, Text, View } from "
 import { black, white } from "../../globals/colors"
 import { scaledVal } from "../../globals/utilities"
 import Fontisto from "react-native-vector-icons/Fontisto";
-import { NavigationProp, useNavigation } from "@react-navigation/native";
+import { NavigationProp, useFocusEffect, useNavigation } from "@react-navigation/native";
 import { RootStackType } from "../../navigation/RootStack";
 import useWatchlist from "../../hooks/movies/useWatchlist";
 import { Movie } from "../../types/Movies";
 import MovieCard from "../../components/movies/MovieCard";
 import WatchListEmptyContainer from "../../components/movies/WatchListEmptyContainer";
+import { useCallback, useLayoutEffect } from "react";
 const WatchList = () => {
     const navigation = useNavigation<NavigationProp<RootStackType, "WatchList">>()
     // watchlist hook responsilbe for fetching the saved watchlist 
@@ -24,6 +25,7 @@ const WatchList = () => {
             />
         )
     }
+  
     return (
         <SafeAreaView style={styles.container}>
             {/* header starts */}

@@ -8,6 +8,7 @@ const mockNavigate = jest.fn()
 const mockGoBack = jest.fn()
 jest.mock('@react-navigation/native', () => ({
     ...jest.requireActual('@react-navigation/native'),
+    useFocusEffect: jest.fn(),
     useNavigation: () => ({
         navigate: mockNavigate,
         goBack: mockGoBack

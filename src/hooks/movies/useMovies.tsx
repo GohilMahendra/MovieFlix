@@ -12,12 +12,15 @@ const useMovies = () => {
     const [category, setCategory] = useState<MovieCategory>("now_playing")
     const getMovies = async () => {
         try {
+            setLoading(true)
             const response = await fetchMovies(category, 1)
             const { results, page, total_pages } = response as ApiResponse
             setMovies(results)
             setTotalPages(total_pages)
+            setLoading(false)
         }
         catch (err) {
+            setLoading(false)
             Alert.alert("Error",JSON.stringify(err))
         }
     }

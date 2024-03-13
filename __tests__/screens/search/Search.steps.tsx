@@ -19,6 +19,8 @@ jest.mock("../../../src/apis/MovieApi", () => {
     }
 })
 
+jest.useFakeTimers()
+
 describe("search screen ...",()=>{
     beforeEach(()=>{
         render(
@@ -28,9 +30,11 @@ describe("search screen ...",()=>{
 
     it("i can search the word in input",async()=>{
         const input = screen.getByTestId("input_search")
+        jest.runAllTimers()
         await act(async()=>{
             fireEvent(input,"changeText","og")
         })
+        jest.advanceTimersByTime(500)
         const list = screen.getByTestId("list_search")
         expect(list.props.data.length).toBe(20)
     })
@@ -38,10 +42,11 @@ describe("search screen ...",()=>{
     it("I can press on the result will call navigate to other screen",async()=>{
 
         const input = screen.getByTestId("input_search")
+        jest.runAllTimers()
         await act(async()=>{
             fireEvent(input,"changeText","og")
         })
-
+        jest.advanceTimersByTime(500)
         const allCards = screen.root.findAllByType(MovieCard);
 
         const card = allCards[0]

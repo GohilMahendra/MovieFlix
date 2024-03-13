@@ -1,4 +1,4 @@
-import { FlatList, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native"
+import { ActivityIndicator, Dimensions, FlatList, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native"
 import { black, primary, white } from "../../globals/colors"
 import Fontisto from "react-native-vector-icons/Fontisto";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
@@ -11,8 +11,9 @@ import { RootStackType } from "../../navigation/RootStack";
 import { scaledVal } from "../../globals/utilities";
 import { APP_NAME } from "../../globals/constants";
 import { useCallback, useRef } from "react";
+const { height } = Dimensions.get("screen")
 const Movies = () => {
-  const { movies, category, setCategory, getMoreMovies } = useMovies()
+  const { loading, movies, category, setCategory, getMoreMovies } = useMovies()
   const list_ref = useRef<FlatList | null>(null)
   const categories: Category[] = [
     {
@@ -36,14 +37,14 @@ const Movies = () => {
   const renderMovies = useCallback((movie: Movie, index: number) => {
     return (
       <MovieCard
-        testID = {"card_movie"+index.toString()}
+        testID={"card_movie" + index.toString()}
         movie={movie}
         onMoviePress={(movie_id: number) => navigation.navigate("MovieDetails", {
           movie_id: movie_id
         })}
       />
     )
-  },[])
+  }, [])
 
   const changeCategory = (selected_category: MovieCategory) => {
     list_ref.current?.scrollToOffset({ animated: true, offset: 0 });
@@ -52,6 +53,15 @@ const Movies = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      {
+        loading &&
+        <ActivityIndicator
+          color={white}
+          size={"large"}
+          style={styles.loader}
+        />
+
+      }
       <View style={styles.header}>
         <View />
         <Text style={styles.txtHeader}>{APP_NAME}</Text>
@@ -60,7 +70,7 @@ const Movies = () => {
             onPress={() => navigation.navigate("WatchList")}
             name="heart"
             style={{
-              marginRight:scaledVal(10)
+              marginRight: scaledVal(10)
             }}
             color={white}
             size={20}
@@ -135,8 +145,8 @@ const styles = StyleSheet.create({
     fontWeight: "800",
     fontSize: scaledVal(20),
     color: primary,
-    flex:0.3,
-    textAlign:"center"
+    marginLeft: scaledVal(20),
+    textAlign: "center"
   },
   tab:
   {
@@ -151,5 +161,11 @@ const styles = StyleSheet.create({
   btnContainer:
   {
     flexDirection: "row",
+  },
+  loader:
+  {
+    position: "absolute",
+    alignSelf: 'center',
+    marginTop: height / 2 - scaledVal(20)
   }
 })

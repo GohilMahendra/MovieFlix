@@ -1,4 +1,4 @@
-import { SafeAreaView, TouchableOpacity, ScrollView, View, Image, Text, RefreshControl, StyleSheet } from "react-native"
+import { SafeAreaView, TouchableOpacity, ScrollView, View, Image, Text, RefreshControl, StyleSheet, Alert, Dimensions } from "react-native"
 import { scaledVal } from "../../globals/utilities"
 import Fontisto from "react-native-vector-icons/Fontisto";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
@@ -10,6 +10,8 @@ import { RootStackType } from "../../navigation/RootStack";
 import { fetchMovieDetails } from "../../apis/MovieApi";
 import { MEDIA_BASE_URL } from "../../globals/constants";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { ActivityIndicator } from "react-native";
+const { height } = Dimensions.get("screen")
 const MovieDetails = () => {
     const [movie, setMovie] = useState<Movie | null>(null)
     const [loading, setLoading] = useState<boolean>(false)
@@ -55,7 +57,7 @@ const MovieDetails = () => {
             setLoading(false)
         }
         catch (err) {
-            console.log(err)
+            Alert.alert("Error", err as string)
             setLoading(false)
         }
     }
@@ -69,6 +71,14 @@ const MovieDetails = () => {
 
     return (
         <SafeAreaView style={styles.container}>
+            {
+                loading &&
+                <ActivityIndicator
+                    color={white}
+                    size={"large"}
+                    style={styles.loader}
+                />
+            }
             <View style={styles.header}>
                 <Fontisto
                     testID={"btn_goBack"}
@@ -212,4 +222,10 @@ const styles = StyleSheet.create({
         color: white,
         fontSize: scaledVal(15)
     },
+    loader:
+    {
+        position: "absolute",
+        alignSelf: 'center',
+        marginTop: height / 2 - scaledVal(20)
+    }
 })
