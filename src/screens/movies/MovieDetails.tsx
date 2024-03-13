@@ -1,4 +1,4 @@
-import { SafeAreaView,ScrollView,View,Image, Text, Dimensions, RefreshControl, StyleSheet } from "react-native"
+import { SafeAreaView, TouchableOpacity, ScrollView, View, Image, Text, RefreshControl, StyleSheet } from "react-native"
 import { scaledVal } from "../../globals/utilities"
 import Fontisto from "react-native-vector-icons/Fontisto";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
@@ -9,129 +9,120 @@ import { NavigationProp, RouteProp, useNavigation, useRoute } from "@react-navig
 import { RootStackType } from "../../navigation/RootStack";
 import { fetchMovieDetails } from "../../apis/MovieApi";
 import { MEDIA_BASE_URL } from "../../globals/constants";
-const { height,width } = Dimensions.get("window")
-const MovieDetails = () =>
-{
-
-    const [movie,setMovie] = useState<Movie | null>(null)
-    const [loading,setLoading] = useState<boolean>(false)
-    const route = useRoute<RouteProp<RootStackType,"MovieDetails">>()
-    const navigation = useNavigation<NavigationProp<RootStackType,"MovieDetails">>()
+import AsyncStorage from "@react-native-async-storage/async-storage";
+const MovieDetails = () => {
+    const [movie, setMovie] = useState<Movie | null>(null)
+    const [loading, setLoading] = useState<boolean>(false)
+    const route = useRoute<RouteProp<RootStackType, "MovieDetails">>()
+    const navigation = useNavigation<NavigationProp<RootStackType, "MovieDetails">>()
+    const [isInwatchlist, setIsInWatchList] = useState<boolean>(false)
     const { movie_id } = route.params
 
-    const getMovie = async() =>
-    {
-        try
-        {
+    const getWatchListStatus = async () => {
+        const watchlistMovies = await AsyncStorage.getItem("watchlist_movies")
+        const parsedMovies = (watchlistMovies) ? JSON.parse(watchlistMovies) : []
+        const currentMovie = parsedMovies.find((child: Movie) => child.id === movie!.id)
+        console.log("this movie is in watch list")
+        if (currentMovie) {
+            setIsInWatchList(true)
+        }
+    }
+
+    const toggleWatchlist = async () => {
+        if (!movie)
+            return
+
+        const watchlistMovies = await AsyncStorage.getItem("watchlist_movies")
+        const parsedMovies: Movie[] = (watchlistMovies) ? JSON.parse(watchlistMovies) : []
+        const isAlreadyThere = parsedMovies.findIndex((child: Movie) => child.id == movie.id)
+        if (isAlreadyThere != -1) {
+            parsedMovies.splice(isAlreadyThere, 1)
+            setIsInWatchList(false)
+        }
+        else {
+            parsedMovies.push(movie)
+            setIsInWatchList(true)
+        }
+
+        await AsyncStorage.setItem("watchlist_movies", JSON.stringify(parsedMovies))
+    }
+
+    const getMovie = async () => {
+        try {
             setLoading(true)
             const response: Movie = await fetchMovieDetails(movie_id)
             setMovie(response)
             setLoading(false)
         }
-        catch(err)
-        {
+        catch (err) {
             console.log(err)
             setLoading(false)
         }
     }
-    useEffect(()=>{
+    useEffect(() => {
+        if (movie)
+            getWatchListStatus()
+    }, [movie])
+    useEffect(() => {
         getMovie()
-    },[movie_id])
+    }, [movie_id])
 
-    return(
-        <SafeAreaView style={{flex:1,backgroundColor:black}}>
-            <View style={{
-                padding: scaledVal(10),
-                justifyContent:'space-between',
-                flexDirection:"row",
-                alignItems:"center"
-            }}>
-                <Fontisto 
-                onPress={()=>navigation.goBack()}
-                name="angle-left"
-                color={white}
-                size={scaledVal(15)}
+    return (
+        <SafeAreaView style={styles.container}>
+            <View style={styles.header}>
+                <Fontisto
+                    onPress={() => navigation.goBack()}
+                    name="angle-left"
+                    color={white}
+                    size={scaledVal(15)}
                 />
-                <View/>
+                <View />
             </View>
-            <ScrollView 
-            refreshControl={
-                <RefreshControl
-                tintColor={white}
-                refreshing={loading}
-                onRefresh={()=>getMovie()}
-                />
-            }
-            style={{
-                flex:1,
-                padding: scaledVal(10)
-            }}>
-               {
-                movie && 
-                <View style={{
-                    flex:1,
-        
-                }}>
-                    <View>
-                    <Image
-                    source={{uri:`${MEDIA_BASE_URL + movie.poster_path}` }}
-                    style={{
-                        width:"100%",
-                        height: height/2
-                    }}
+            <ScrollView
+                refreshControl={
+                    <RefreshControl
+                        tintColor={white}
+                        refreshing={loading}
+                        onRefresh={() => getMovie()}
                     />
-                    </View>
-                    <Text style={{
-                        color: white,
-                        marginVertical:10,
-                        alignSelf:"center",
-                        textAlign:"center",
-                        fontWeight:"bold",
-                        fontSize: scaledVal(25)
-                    }}>{movie.title}</Text>
-                     <View style={{
-                        flexDirection:"row",
-                        alignSelf:"center",
-                        alignItems:'center',
-                        marginVertical:scaledVal(10)
-                    }}>
-                        <FontAwesome5
-                        name={"star"}
-                        solid
-                        size={scaledVal(20)}
-                        color={"gold"}
-                        />
-                        <Text style={{
-                            fontSize: scaledVal(20),
-                            color: white,
-                            marginLeft: scaledVal(10)
-                        }}>{movie.vote_average.toFixed(1)}</Text>
-                    </View>
-                    <View style={{
-                        flexDirection:"row",
-                        marginVertical:scaledVal(10)
-                    }}>
-                        <Text style={{
-                            fontSize: scaledVal(15),
-                            color: white
-                        }}>Release Date: </Text>
-                        <Text style={{
-                            fontSize: scaledVal(15),
-                            color: white,
-                        }}>{movie.release_date}</Text>
-                    </View>
-                      <Text style={{
-                        color: white,
-                        fontWeight:'bold',
-                        fontSize: scaledVal(20)
-                    }}>Summary:</Text>
-                     <Text style={{
-                        color: white,
-                        fontSize: scaledVal(15)
-                    }}>{movie.overview}</Text>
-                </View>
-               }
+                }
+                style={styles.movieContainer}>
+                {
+                    movie &&
+                    <View style={styles.innerMovieContainer}>
+                        <View>
+                            <Image
+                                source={{ uri: `${MEDIA_BASE_URL + movie.poster_path}` }}
+                                style={styles.imgPoster}
+                            />
+                        </View>
+                        <Text style={styles.txt_title}>{movie.title}</Text>
+                        <TouchableOpacity
+                            onPress={() => toggleWatchlist()}
+                            style={[styles.btnToggleWatchlist, { backgroundColor: (isInwatchlist) ? black : white }]}>
+                            <Text style={[styles.txtWatchlist, { color: (isInwatchlist) ? white : black }]}>{
+                                isInwatchlist ?
+                                    "remove from the watch list"
+                                    : "+ Add to watch list"
+                            }</Text>
 
+                        </TouchableOpacity>
+                        <View style={styles.ratingContainer}>
+                            <FontAwesome5
+                                name={"star"}
+                                solid
+                                size={scaledVal(20)}
+                                color={"gold"}
+                            />
+                            <Text style={styles.txtRate}>{movie.vote_average.toFixed(1)}</Text>
+                        </View>
+                        <View style={styles.dateContainer}>
+                            <Text style={styles.txtDateTitle}>Release Date: </Text>
+                            <Text style={styles.txtDate}>{movie.release_date}</Text>
+                        </View>
+                        <Text style={styles.txtOverview}>{movie.overview}</Text>
+                    </View>
+                }
             </ScrollView>
         </SafeAreaView>
     )
@@ -139,5 +130,83 @@ const MovieDetails = () =>
 export default MovieDetails
 
 const styles = StyleSheet.create({
-
+    container:
+    {
+        flex: 1,
+        backgroundColor: black
+    },
+    header:
+    {
+        padding: scaledVal(10),
+        justifyContent: 'space-between',
+        flexDirection: "row",
+        alignItems: "center"
+    },
+    movieContainer:
+    {
+        flex: 1,
+        padding: scaledVal(10)
+    },
+    imgPoster:
+    {
+        width: "100%",
+        aspectRatio: 1,
+        height: "auto"
+    },
+    txt_title:
+    {
+        color: white,
+        marginVertical: 10,
+        fontWeight: "bold",
+        fontSize: scaledVal(25)
+    },
+    btnToggleWatchlist:
+    {
+        padding: scaledVal(10),
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderWidth: 0.2,
+        borderColor: white,
+        borderRadius: scaledVal(5),
+    },
+    ratingContainer:
+    {
+        flexDirection: "row",
+        alignItems: 'center',
+        marginVertical: scaledVal(10)
+    },
+    innerMovieContainer:
+    {
+        flex: 1,
+    },
+    txtRate:
+    {
+        fontSize: scaledVal(20),
+        color: white,
+        marginLeft: scaledVal(10)
+    },
+    txtWatchlist:
+    {
+        fontSize: scaledVal(15),
+    },
+    dateContainer:
+    {
+        flexDirection: "row",
+        marginVertical: scaledVal(10)
+    },
+    txtDateTitle:
+    {
+        fontSize: scaledVal(15),
+        color: white
+    },
+    txtDate:
+    {
+        fontSize: scaledVal(15),
+        color: white,
+    },
+    txtOverview:
+    {
+        color: white,
+        fontSize: scaledVal(15)
+    },
 })

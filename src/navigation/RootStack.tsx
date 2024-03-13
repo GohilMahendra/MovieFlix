@@ -4,6 +4,7 @@ import SplashScreen from "../screens/splash/SplashScreen";
 import Movies from "../screens/movies/Movies";
 import Search from "../screens/search/Search";
 import MovieDetails from "../screens/movies/MovieDetails";
+import WatchList from "../screens/movies/WatchList";
 export type RootStackType =
     {
         SplashScreen: undefined,
@@ -11,7 +12,8 @@ export type RootStackType =
         Search: undefined,
         MovieDetails:{
             movie_id: number
-        }
+        },
+        WatchList: undefined
     }
 
 const RootStack = () => {
@@ -38,6 +40,10 @@ const RootStack = () => {
                  <RootStackNavigation.Screen
                     name="MovieDetails"
                     component={MovieDetails}
+                />
+                 <RootStackNavigation.Screen
+                    name="WatchList"
+                    component={WatchList}
                 />
             </RootStackNavigation.Navigator>
         </NavigationContainer>

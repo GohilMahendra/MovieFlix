@@ -1,6 +1,7 @@
 import { FlatList, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native"
 import { black, primary, white } from "../../globals/colors"
 import Fontisto from "react-native-vector-icons/Fontisto";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import useMovies from "../../hooks/movies/useMovies";
 import { Category, Movie, MovieCategory } from "../../types/Movies";
 import { TouchableOpacity } from "react-native";
@@ -13,7 +14,7 @@ import { useRef } from "react";
 const Movies = () => {
   const { movies, category, setCategory, getMoreMovies } = useMovies()
   const list_ref = useRef<FlatList | null>(null)
-  const categories:Category[] = [
+  const categories: Category[] = [
     {
       label: "Now Playing",
       value: "now_playing"
@@ -53,12 +54,25 @@ const Movies = () => {
       <View style={styles.header}>
         <View />
         <Text style={styles.txtHeader}>{APP_NAME}</Text>
-        <Fontisto
-          onPress={() => navigation.navigate("Search")}
-          name="search"
-          color={white}
-          size={20}
-        />
+        <View style={{
+          flexDirection: "row",
+        }}>
+          <FontAwesome5
+            onPress={() => navigation.navigate("WatchList")}
+            name="heart"
+            style={{
+              marginRight:scaledVal(10)
+            }}
+            color={white}
+            size={20}
+          />
+          <Fontisto
+            onPress={() => navigation.navigate("Search")}
+            name="search"
+            color={white}
+            size={20}
+          />
+        </View>
       </View>
       <View style={styles.tabContainer}>
         <ScrollView
@@ -74,7 +88,7 @@ const Movies = () => {
                     backgroundColor: (category == type.value) ? white : black,
                   }]}>
                   <Text style={{
-                    fontWeight:"bold",
+                    fontWeight: "bold",
                     color: (category == type.value) ? black : white,
                   }}>{type.label}</Text>
                 </TouchableOpacity>
@@ -119,7 +133,9 @@ const styles = StyleSheet.create({
   {
     fontWeight: "800",
     fontSize: scaledVal(20),
-    color: primary
+    color: primary,
+    flex:0.3,
+    textAlign:"center"
   },
   tab:
   {

@@ -39,6 +39,7 @@ const Search = () => {
 
             <FlatList
                 refreshControl={<RefreshControl
+                tintColor={white}
                 refreshing={loading}
                 />}
                 data={movies}
