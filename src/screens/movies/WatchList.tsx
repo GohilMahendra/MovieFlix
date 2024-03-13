@@ -1,4 +1,4 @@
-import { Dimensions, FlatList, RefreshControl, SafeAreaView, StyleSheet, Text, View } from "react-native"
+import { FlatList, RefreshControl, SafeAreaView, StyleSheet, Text, View } from "react-native"
 import { black, white } from "../../globals/colors"
 import { scaledVal } from "../../globals/utilities"
 import Fontisto from "react-native-vector-icons/Fontisto";
@@ -8,14 +8,14 @@ import useWatchlist from "../../hooks/movies/useWatchlist";
 import { Movie } from "../../types/Movies";
 import MovieCard from "../../components/movies/MovieCard";
 import WatchListEmptyContainer from "../../components/movies/WatchListEmptyContainer";
-const { height, width } = Dimensions.get("screen")
 const WatchList = () => {
     const navigation = useNavigation<NavigationProp<RootStackType, "WatchList">>()
+    // watchlist hook responsilbe for fetching the saved watchlist 
     const { loading, movies, getWatchlist } = useWatchlist()
-
     const renderMovies = (movie: Movie, index: number) => {
         return (
             <MovieCard
+                testID={"card_movie" + index.toString()}
                 movie={movie}
                 // navigation code
                 onMoviePress={(movie_id: number) => navigation.navigate("MovieDetails", {
@@ -29,6 +29,7 @@ const WatchList = () => {
             {/* header starts */}
             <View style={styles.header}>
                 <Fontisto
+                    testID={"btn_goBack"}
                     onPress={() => navigation.goBack()}
                     name="angle-left"
                     color={white}
@@ -40,6 +41,8 @@ const WatchList = () => {
             {/* header ends */}
             {/* list of watchlist starts */}
             <FlatList
+                testID={"list_watchlist"}
+                // pull to refresh for re-fetch, refresh the watchlist
                 refreshControl={
                     <RefreshControl
                         tintColor={white}

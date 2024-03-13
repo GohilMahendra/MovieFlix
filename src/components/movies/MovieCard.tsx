@@ -3,10 +3,11 @@ import { Movie } from "../../types/Movies"
 import { matt_black, white } from "../../globals/colors"
 import { BASE_URL, MEDIA_BASE_URL } from "../../globals/constants"
 import { scaledVal } from "../../globals/utilities"
-const { height, width } = Dimensions.get("screen")
+const { width } = Dimensions.get("screen")
 
 export type MovieCardProps =
     {
+        testID: string,
         movie: Movie,
         onMoviePress: (movie: number) => void
     }

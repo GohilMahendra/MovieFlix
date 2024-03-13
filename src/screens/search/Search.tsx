@@ -7,48 +7,68 @@ import MovieCard from "../../components/movies/MovieCard"
 import { Movie } from "../../types/Movies"
 import { NavigationProp, useNavigation } from "@react-navigation/native"
 import { RootStackType } from "../../navigation/RootStack"
-import EmptyContainer from "../../components/movies/EmptyContainer"
-const { fontScale, height, width } = Dimensions.get("screen")
+import EmptyContainer from "../../globals/EmptyContainer"
+import { useCallback } from "react"
+import { ActivityIndicator } from "react-native"
+const { height } = Dimensions.get("screen")
 const Search = () => {
-    const { loading,searchTerm, setSearchTerm, movies} = useSearch()
+    // hook created for search actions called once searchTerm changes
+    // use setSearchTerm
+    const { loading, searchTerm, setSearchTerm, movies } = useSearch()
     const navigation = useNavigation<NavigationProp<RootStackType, "Search">>()
-    const renderMovies = (movie: Movie, index: number) => {
+    const renderMovies = useCallback((movie: Movie, index: number) => {
         return (
             <MovieCard
+                testID={"card_movie" + index.toString()}
                 movie={movie}
                 onMoviePress={(movie_id: number) =>
                     navigation.navigate("MovieDetails", { movie_id: movie_id })}
             />
         )
-    }
+    }, [])
     return (
         <SafeAreaView style={styles.container}>
+            {
+                loading && 
+                <ActivityIndicator
+                color={white}
+                size={"large"}
+                style={{
+                    position:"absolute",
+                    alignSelf:'center',
+                    marginTop: height/2 - scaledVal(20)
+                }}
+                />
+            }
+            {/* header section starts */}
             <View style={styles.header}>
+                {/* back button */}
                 <Fontisto
+                    testID={"btn_goBack"}
                     onPress={() => navigation.goBack()}
                     name="angle-left"
                     color={white}
                     size={scaledVal(15)}
                 />
+                {/* search input */}
                 <TextInput
+                    testID={"input_search"}
+                    placeholder={"Search here ..."}
+                    placeholderTextColor={white}
                     value={searchTerm}
                     onChangeText={(text: string) => setSearchTerm(text)}
                     style={styles.inputSearch}
                 />
             </View>
-
+            {/* header section ends */}
             <FlatList
-                refreshControl={<RefreshControl
-                tintColor={white}
-                refreshing={loading}
-                />}
+                testID={"list_search"}
                 data={movies}
                 ListEmptyComponent={() => (
-                    searchTerm.length > 0 &&
+                 (!loading && searchTerm.length > 0) &&
                     <EmptyContainer />
                 )}
                 numColumns={3}
-                // onEndReached={() => getMoreMovies()}
                 keyExtractor={item => item.id.toString()}
                 renderItem={({ item, index }) => renderMovies(item, index)}
             />

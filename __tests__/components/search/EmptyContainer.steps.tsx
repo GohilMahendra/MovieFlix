@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react-native"
-import EmptyContainer from "../../../src/components/movies/EmptyContainer"
+import EmptyContainer from "../../../src/globals/EmptyContainer"
 
 describe("Empty Container ...",()=>{
     beforeAll(()=>{

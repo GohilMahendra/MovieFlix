@@ -2,7 +2,6 @@ import { render, screen } from "@testing-library/react-native";
 import SplashScreen from "../../../src/screens/splash/SplashScreen";
 
 const mockNavigate = jest.fn();
-const mockReplace = jest.fn();
 const mockDispatch = jest.fn()
 jest.mock('@react-navigation/native', () => ({
   ...jest.requireActual('@react-navigation/native'),

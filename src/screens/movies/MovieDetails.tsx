@@ -71,6 +71,7 @@ const MovieDetails = () => {
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
                 <Fontisto
+                    testID={"btn_goBack"}
                     onPress={() => navigation.goBack()}
                     name="angle-left"
                     color={white}
@@ -79,6 +80,7 @@ const MovieDetails = () => {
                 <View />
             </View>
             <ScrollView
+                testID={"scroll_fullScreen"}
                 refreshControl={
                     <RefreshControl
                         tintColor={white}
@@ -96,8 +98,9 @@ const MovieDetails = () => {
                                 style={styles.imgPoster}
                             />
                         </View>
-                        <Text style={styles.txt_title}>{movie.title}</Text>
+                        <Text testID={"txt_title"} style={styles.txt_title}>{movie.title}</Text>
                         <TouchableOpacity
+                            testID={"btn_addToWatchlist"}
                             onPress={() => toggleWatchlist()}
                             style={[styles.btnToggleWatchlist, { backgroundColor: (isInwatchlist) ? black : white }]}>
                             <Text style={[styles.txtWatchlist, { color: (isInwatchlist) ? white : black }]}>{

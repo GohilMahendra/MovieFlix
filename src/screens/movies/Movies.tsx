@@ -10,7 +10,7 @@ import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { RootStackType } from "../../navigation/RootStack";
 import { scaledVal } from "../../globals/utilities";
 import { APP_NAME } from "../../globals/constants";
-import { useRef } from "react";
+import { useCallback, useRef } from "react";
 const Movies = () => {
   const { movies, category, setCategory, getMoreMovies } = useMovies()
   const list_ref = useRef<FlatList | null>(null)
@@ -33,16 +33,17 @@ const Movies = () => {
     }
   ]
   const navigation = useNavigation<NavigationProp<RootStackType, "Movies">>()
-  const renderMovies = (movie: Movie, index: number) => {
+  const renderMovies = useCallback((movie: Movie, index: number) => {
     return (
       <MovieCard
+        testID = {"card_movie"+index.toString()}
         movie={movie}
         onMoviePress={(movie_id: number) => navigation.navigate("MovieDetails", {
           movie_id: movie_id
         })}
       />
     )
-  }
+  },[])
 
   const changeCategory = (selected_category: MovieCategory) => {
     list_ref.current?.scrollToOffset({ animated: true, offset: 0 });
@@ -54,9 +55,7 @@ const Movies = () => {
       <View style={styles.header}>
         <View />
         <Text style={styles.txtHeader}>{APP_NAME}</Text>
-        <View style={{
-          flexDirection: "row",
-        }}>
+        <View style={styles.btnContainer}>
           <FontAwesome5
             onPress={() => navigation.navigate("WatchList")}
             name="heart"
@@ -83,6 +82,7 @@ const Movies = () => {
             categories.map((type, index) => {
               return (
                 <TouchableOpacity
+                  testID={type.value}
                   onPress={() => changeCategory(type.value)}
                   style={[styles.tab, {
                     backgroundColor: (category == type.value) ? white : black,
@@ -98,6 +98,7 @@ const Movies = () => {
         </ScrollView>
       </View>
       <FlatList
+        testID={"list_movies"}
         ref={ref => list_ref.current = ref}
         data={movies}
         extraData={category}
@@ -146,5 +147,9 @@ const styles = StyleSheet.create({
     borderRadius: scaledVal(5),
     borderColor: white,
     borderWidth: 0.2
+  },
+  btnContainer:
+  {
+    flexDirection: "row",
   }
 })

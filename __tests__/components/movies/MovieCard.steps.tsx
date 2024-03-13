@@ -7,6 +7,7 @@ describe("Movie Card componenents",()=>{
     beforeEach(()=>{
         render(
             <MovieCard
+            testID={"movie_card"}
             movie={apiResponseMovie}
             onMoviePress={mockPress}
             />

@@ -1,6 +1,6 @@
 import { Dimensions, StyleSheet, Text, View } from "react-native"
-import { white } from "../../globals/colors"
-import { scaledVal } from "../../globals/utilities"
+import { white } from "./colors"
+import { scaledVal } from "./utilities"
 const { height,width } = Dimensions.get("screen")
 const EmptyContainer = () =>
 {
@@ -16,11 +16,11 @@ const styles = StyleSheet.create({
     {
         height: height,
         width: width,
-        justifyContent:'center',
         alignItems:'center'
     },
     txt_message:
     {
+        marginTop: height/2.5,
         color: white,
         fontSize: scaledVal(15)
     }

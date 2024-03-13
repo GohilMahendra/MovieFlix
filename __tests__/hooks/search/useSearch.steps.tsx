@@ -11,8 +11,7 @@ jest.mock("../../../src/apis/MovieApi",()=>{
 describe("useSearch hooks ...",()=>{
     it("search will be called on change of search term",async()=>{
         const { result } = renderHook(()=>useSearch())
-      
-
+    
         await act(async()=>{
             result.current.setSearchTerm("die")
         })
