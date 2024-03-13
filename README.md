@@ -42,6 +42,20 @@ yarn ios
 <table>
   <tr>
     <td align="center">
+      <img src="screenshots/Screenshot 2024-03-14 at 2.03.12 AM.png" alt="Landscape Screenshot 1" width="400" />
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="screenshots/Screenshot 2024-03-14 at 2.03.19 AM.png" alt="Landscape Screenshot 2" width="400" />
+    </td>
+  </tr>
+</table>
+
+
+<table>
+  <tr>
+    <td align="center">
       <img src="screenshots/Simulator Screenshot - Iphone 14 - 2024-03-14 at 02.03.35.png" alt="Screenshot 1" width="200" />
     </td>
     <td align="center">
