@@ -42,12 +42,12 @@ yarn ios
 <table>
   <tr>
     <td align="center">
-      <img src="screenshots/Screenshot 2024-03-14 at 2.03.12 AM.png" alt="Landscape Screenshot 1" width="400" />
+      <img src="screenshots/Screenshot 2024-03-14 at 2.03.12 AM.png" alt="Landscape Screenshot 1" width="600" />
     </td>
   </tr>
   <tr>
     <td align="center">
-      <img src="screenshots/Screenshot 2024-03-14 at 2.03.19 AM.png" alt="Landscape Screenshot 2" width="400" />
+      <img src="screenshots/Screenshot 2024-03-14 at 2.03.19 AM.png" alt="Landscape Screenshot 2" width="600" />
     </td>
   </tr>
 </table>
