@@ -1,6 +1,6 @@
 # MovieFlix
 
-A OTT app for curated korean dramas
+A OTT app for curated Movies
 
 ## Features
 - splash screen
