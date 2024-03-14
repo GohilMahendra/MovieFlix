@@ -25,6 +25,6 @@ describe("SplashScreen ...",()=>{
     })
     it("it will navigate to movie screen after 3 seconds",()=>{
         jest.advanceTimersByTime(3000)
-        expect(mockNavigate).toHaveBeenCalled()
+        expect(mockDispatch).toHaveBeenCalled()
     })
 })
