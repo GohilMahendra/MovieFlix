@@ -18,7 +18,7 @@ const useSearch = () => {
             setLoading(false)
         }
         catch (err: any) {
-            Alert.alert("Error","Api Error")
+            Alert.alert("Error",JSON.stringify(error))
             setLoading(false)
             setError(error)
         }

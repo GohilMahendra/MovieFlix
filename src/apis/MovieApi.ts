@@ -41,7 +41,6 @@ export const searchMovies = async (searchTerm: string) => {
             }
     }
     catch (error: any) {
-        console.log(error)
         throw new Error(error)
     }
 }
