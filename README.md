@@ -1,4 +1,4 @@
-# DramaVista
+# MovieFlix
 
 A OTT app for curated korean dramas
 
