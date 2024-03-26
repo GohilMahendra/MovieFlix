@@ -10,7 +10,6 @@ import { RootStackType } from "../../navigation/RootStack";
 import { fetchMovieDetails } from "../../apis/MovieApi";
 import { MEDIA_BASE_URL } from "../../globals/constants";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { ActivityIndicator } from "react-native";
 const { height } = Dimensions.get("screen")
 const MovieDetails = () => {
     const [movie, setMovie] = useState<Movie | null>(null)
@@ -70,14 +69,6 @@ const MovieDetails = () => {
 
     return (
         <SafeAreaView style={styles.container}>
-            {
-                loading &&
-                <ActivityIndicator
-                    color={white}
-                    size={"large"}
-                    style={styles.loader}
-                />
-            }
             <View style={styles.header}>
                 <Fontisto
                     testID={"btn_goBack"}
