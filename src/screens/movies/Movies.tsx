@@ -91,6 +91,7 @@ const Movies = () => {
           {categories.map((type, index) => {
             return (
               <TouchableOpacity
+                key={`category_key${type.value}`}
                 testID={type.value}
                 onPress={() => changeCategory(type.value)}
                 style={[
