@@ -8,12 +8,8 @@
 import React from 'react';
 import RootStack from './src/navigation/RootStack';
 
-
 function App() {
-
-  return (
-    <RootStack />
-  );
+  return <RootStack />;
 }
 
 export default App;
