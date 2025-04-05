@@ -26,7 +26,7 @@ const useSearch = () => {
   const debouncedGetSearchResult = debounce(getSearchResult, 1000);
 
   useEffect(() => {
-    if (!searchTerm) return;
+    if (!searchTerm || searchTerm.trim().length <= 3) return;
 
     debouncedGetSearchResult();
     return () => debouncedGetSearchResult.cancel();

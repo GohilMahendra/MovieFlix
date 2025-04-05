@@ -99,6 +99,11 @@ const MovieDetails = () => {
           color={white}
           size={scaledVal(15)}
         />
+        {movie && (
+          <Text testID={'txt_HeaderTitle'} style={styles.txt_header_title}>
+            {movie.title}
+          </Text>
+        )}
         <View />
       </View>
       <ScrollView
@@ -182,6 +187,12 @@ const styles = StyleSheet.create({
     width: '100%',
     aspectRatio: 2 / 3,
     height: 'auto',
+    borderRadius: 10,
+  },
+  txt_header_title: {
+    color: white,
+    fontWeight: 'bold',
+    fontSize: scaledVal(20),
   },
   txt_title: {
     color: white,
