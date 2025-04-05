@@ -67,3 +67,5 @@ yarn-error.log
 
 secrets.ts
 keystore.properties
+android/keystore.properties
+android/app/movieflix-release-key.keystore
