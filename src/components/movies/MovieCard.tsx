@@ -9,10 +9,12 @@ import {
 } from 'react-native';
 import {Movie} from '../../types/Movies';
 import {matt_black, white} from '../../globals/colors';
-import {BASE_URL, MEDIA_BASE_URL} from '../../globals/constants';
+import {MEDIA_BASE_URL} from '../../globals/constants';
 import {scaledVal} from '../../globals/utilities';
+import FastImage from 'react-native-fast-image';
 const {width} = Dimensions.get('screen');
 
+// agnostic component dont handle any business logic, just pass callback on Actions
 export type MovieCardProps = {
   testID: string;
   movie: Movie;
@@ -27,7 +29,7 @@ const MovieCard = (props: MovieCardProps) => {
       onPress={() => onMoviePress(movie.id)}
       style={styles.container}>
       <View>
-        <Image
+        <FastImage
           source={{uri: `${MEDIA_BASE_URL + movie.poster_path}`}}
           style={styles.imgPoster}
         />
