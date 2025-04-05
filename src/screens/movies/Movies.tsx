@@ -21,6 +21,8 @@ import {RootStackType} from '../../navigation/RootStack';
 import {scaledVal} from '../../globals/utilities';
 import {APP_NAME} from '../../globals/constants';
 import {useCallback, useRef} from 'react';
+import MovieCardShimmer from '../../components/shimmers/MovieCardShimmer';
+import MovieListShimmer from '../../components/shimmers/MovieListShimmer';
 const {height} = Dimensions.get('screen');
 const Movies = () => {
   const {loading, movies, category, setCategory, getMoreMovies} = useMovies();
@@ -112,24 +114,28 @@ const Movies = () => {
           })}
         </ScrollView>
       </View>
-      <FlatList
-        refreshControl={
-          <RefreshControl
-            refreshing={loading}
-            onRefresh={() => {
-              setCategory(category);
-            }}
-          />
-        }
-        testID={'list_movies'}
-        ref={ref => (list_ref.current = ref)}
-        data={movies}
-        extraData={category}
-        numColumns={3}
-        onEndReached={() => getMoreMovies()}
-        keyExtractor={item => item.id.toString()}
-        renderItem={({item, index}) => renderMovies(item, index)}
-      />
+      {loading ? (
+        <MovieListShimmer />
+      ) : (
+        <FlatList
+          refreshControl={
+            <RefreshControl
+              refreshing={loading}
+              onRefresh={() => {
+                setCategory(category);
+              }}
+            />
+          }
+          testID={'list_movies'}
+          ref={ref => (list_ref.current = ref)}
+          data={movies}
+          extraData={category}
+          numColumns={3}
+          onEndReached={() => getMoreMovies()}
+          keyExtractor={item => item.id.toString()}
+          renderItem={({item, index}) => renderMovies(item, index)}
+        />
+      )}
     </SafeAreaView>
   );
 };

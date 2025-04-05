@@ -39,7 +39,7 @@ describe('search screen ...', () => {
       fireEvent(input, 'changeText', 'pushpa');
     });
     jest.advanceTimersByTime(1000);
-    const list = screen.getByTestId('list_search');
+    const list = await screen.findByTestId('list_search');
     await waitFor(async () => {
       expect(list.props.data.length).toBe(20);
     });

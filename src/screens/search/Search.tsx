@@ -19,6 +19,7 @@ import {RootStackType} from '../../navigation/RootStack';
 import EmptyContainer from '../../globals/EmptyContainer';
 import {useCallback} from 'react';
 import {ActivityIndicator} from 'react-native';
+import MovieListShimmer from '../../components/shimmers/MovieListShimmer';
 const {height} = Dimensions.get('screen');
 const Search = () => {
   // hook created for search actions called once searchTerm changes
@@ -38,9 +39,6 @@ const Search = () => {
   }, []);
   return (
     <SafeAreaView style={styles.container}>
-      {loading && (
-        <ActivityIndicator color={white} size={'large'} style={styles.loader} />
-      )}
       {/* header section starts */}
       <View style={styles.header}>
         {/* back button */}
@@ -62,16 +60,20 @@ const Search = () => {
         />
       </View>
       {/* header section ends */}
-      <FlatList
-        testID={'list_search'}
-        data={movies}
-        ListEmptyComponent={() =>
-          !loading && searchTerm.length > 3 && <EmptyContainer />
-        }
-        numColumns={3}
-        keyExtractor={item => item.id.toString()}
-        renderItem={({item, index}) => renderMovies(item, index)}
-      />
+      {loading ? (
+        <MovieListShimmer />
+      ) : (
+        <FlatList
+          testID={'list_search'}
+          data={movies}
+          ListEmptyComponent={() =>
+            !loading && searchTerm.length > 3 && <EmptyContainer />
+          }
+          numColumns={3}
+          keyExtractor={item => item.id.toString()}
+          renderItem={({item, index}) => renderMovies(item, index)}
+        />
+      )}
     </SafeAreaView>
   );
 };
