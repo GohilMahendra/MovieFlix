@@ -3,6 +3,7 @@
 A OTT app for curated Movies
 
 ## Features
+
 - splash screen
 - home screen with categories tab
 - categories with pagination
@@ -14,12 +15,12 @@ A OTT app for curated Movies
 - modular custom hooks architecture
 - works both on android and ios
 
-
 # Getting Started
 
 ### secrets
-- need a token to start the project get the token from 
-https://developer.themoviedb.org/reference/movie-now-playing-list
+
+- need a token to start the project get the token from
+  https://developer.themoviedb.org/reference/movie-now-playing-list
 - replace the token placeholder in src/globals/secrets.ts
 
 ### For Android
@@ -57,7 +58,6 @@ yarn ios
   </tr>
 </table>
 
-
 <table>
   <tr>
     <td align="center">
@@ -78,18 +78,18 @@ yarn ios
       <img src="screenshots/Simulator Screenshot - Iphone 14 - 2024-03-14 at 02.04.30.png" alt="Screenshot 5" width="200" />
     </td>
     <td align="center">
-      <img src="screenshots/Simulator Screenshot - Iphone 14 - 2024-03-14 at 02.04.39.png" alt="Screenshot 6" width="200" />
+      <img src="screenshots/Screenshot_1743862192.png" alt="Screenshot 6" width="200" />
     </td>
   </tr>
   <tr>
     <td align="center">
-      <img src="screenshots/Simulator Screenshot - Iphone 14 - 2024-03-14 at 02.04.42.png" alt="Screenshot 7" width="200" />
+      <img src="screenshots/Screenshot_1743862111.png" alt="Screenshot 7" width="200" />
     </td>
     <td align="center">
-      <img src="screenshots/Simulator Screenshot - Iphone 14 - 2024-03-14 at 02.04.53.png" alt="Screenshot 8" width="200" />
+      <img src="screenshots/Screenshot_1743862132.png" alt="Screenshot 8" width="200" />
     </td>
     <td align="center">
-      <img src="screenshots/Simulator Screenshot - Iphone 14 - 2024-03-14 at 02.04.58.png" alt="Screenshot 9" width="200" />
+      <img src="screenshots/Screenshot_1743862402.png" alt="Screenshot 9" width="200" />
     </td>
   </tr>
   <tr>
@@ -99,4 +99,3 @@ yarn ios
     <!-- Add additional screenshots here -->
   </tr>
 </table>
-
