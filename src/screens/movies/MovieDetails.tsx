@@ -108,6 +108,7 @@ const MovieDetails = () => {
       </View>
       <ScrollView
         testID={'scroll_fullScreen'}
+        contentContainerStyle={styles.listContainer}
         refreshControl={
           <RefreshControl
             tintColor={white}
@@ -244,5 +245,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     alignSelf: 'center',
     marginTop: height / 2 - scaledVal(20),
+  },
+  listContainer: {
+    paddingBottom: 150,
   },
 });
