@@ -130,6 +130,7 @@ const Movies = () => {
           ref={ref => (list_ref.current = ref)}
           data={movies}
           extraData={category}
+          removeClippedSubviews
           numColumns={3}
           onEndReached={() => getMoreMovies()}
           keyExtractor={item => item.id.toString()}
