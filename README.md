@@ -45,8 +45,6 @@ yarn ios
 
 ## screenshots
 
-# mobile
-
 <table>
   <tr>
     <td align="center">
@@ -54,6 +52,8 @@ yarn ios
     </td>
   </tr>
 </table>
+
+## Mobile
 
 <table>
   <tr>
@@ -96,7 +96,7 @@ yarn ios
   </tr>
 </table>
 
-# tablet
+## Tablet
 
 <table>
  <tr>
