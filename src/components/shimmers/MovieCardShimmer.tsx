@@ -1,4 +1,5 @@
 import {Dimensions, StyleSheet} from 'react-native';
+import React from 'react';
 import {scaledVal} from '../../globals/utilities';
 import ShimmerPlaceholder from 'react-native-shimmer-placeholder';
 import LinearGradient from 'react-native-linear-gradient';
@@ -16,12 +17,12 @@ const MovieCardShimmer = (props: MovieCardShimmerProps) => {
       <ShimmerPlaceholder
         LinearGradient={LinearGradient}
         style={styles.container}
-        shimmerColors={['#2e2e2e', '#3a3a3a', '#2e2e2e']} // subtle shimmer for dark mode
+        shimmerColors={['#2e2e2e', '#3a3a3a', '#2e2e2e']}
       />
     </View>
   );
 };
-export default MovieCardShimmer;
+export default React.memo(MovieCardShimmer);
 
 const styles = StyleSheet.create({
   container: {

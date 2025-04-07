@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import React from 'react';
 import {Movie} from '../../types/Movies';
 import {matt_black, white} from '../../globals/colors';
 import {MEDIA_BASE_URL} from '../../globals/constants';
@@ -51,7 +52,8 @@ const MovieCard = (props: MovieCardProps) => {
     </TouchableOpacity>
   );
 };
-export default MovieCard;
+
+export default React.memo(MovieCard);
 
 const styles = StyleSheet.create({
   container: {

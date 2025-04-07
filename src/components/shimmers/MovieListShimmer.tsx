@@ -1,16 +1,16 @@
 import {FlatList} from 'react-native';
 import MovieCardShimmer from './MovieCardShimmer';
+import {useCallback} from 'react';
 
 const shimmerData = Array.from({length: 12}).map((_, index) => ({id: index}));
 
 const MovieListShimmer = () => {
-  const renderShimmerItem = ({
-    item,
-    index,
-  }: {
-    item: {id: number};
-    index: number;
-  }) => <MovieCardShimmer testID={`MovieShimmerCard_${index}`} />;
+  const renderShimmerItem = useCallback(
+    ({item, index}: {item: {id: number}; index: number}) => (
+      <MovieCardShimmer testID={`MovieShimmerCard_${index}`} />
+    ),
+    [],
+  );
 
   return (
     <FlatList
