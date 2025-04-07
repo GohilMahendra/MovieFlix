@@ -45,6 +45,8 @@ yarn ios
 
 ## screenshots
 
+# mobile
+
 <table>
   <tr>
     <td align="center">
@@ -92,26 +94,31 @@ yarn ios
       <img src="screenshots/Simulator Screenshot - Iphone 14 - 2024-03-14 at 02.05.08.png" alt="Screenshot 10" width="200" />
     </td>
   </tr>
-  <tr>
+</table>
+
+# tablet
+
+<table>
+ <tr>
   <td align="center">
-    <img src="screenshots/Screenshot_1744024287.png" alt="Screenshot 11" width="200" />
+    <img src="screenshots/Screenshot_1744024287.png" alt="Screenshot 11" width="300" />
   </td>
   <td align="center">
-    <img src="screenshots/Screenshot_1744024294.png" alt="Screenshot 12" width="200" />
+    <img src="screenshots/Screenshot_1744024294.png" alt="Screenshot 12" width="300" />
   </td>
   <td align="center">
-    <img src="screenshots/Screenshot_1744024308.png" alt="Screenshot 13" width="200" />
+    <img src="screenshots/Screenshot_1744024308.png" alt="Screenshot 13" width="300" />
   </td>
  </tr>
   <tr>
     <td align="center">
-      <img src="screenshots/Screenshot_1744024318.png" alt="Screenshot 14" width="200" />
+      <img src="screenshots/Screenshot_1744024318.png" alt="Screenshot 14" width="300" />
     </td>
     <td align="center">
-      <img src="screenshots/Screenshot_1744024333.png" alt="Screenshot 15" width="200" />
+      <img src="screenshots/Screenshot_1744024333.png" alt="Screenshot 15" width="300" />
     </td>
     <td align="center">
-      <img src="screenshots/Screenshot_1744024369.png" alt="Screenshot 16" width="200" />
+      <img src="screenshots/Screenshot_1744024369.png" alt="Screenshot 16" width="300" />
     </td>
   </tr>
 </table>
