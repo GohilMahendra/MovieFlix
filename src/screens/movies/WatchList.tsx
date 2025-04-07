@@ -20,7 +20,7 @@ import useWatchlist from '../../hooks/movies/useWatchlist';
 import {Movie} from '../../types/Movies';
 import MovieCard from '../../components/movies/MovieCard';
 import WatchListEmptyContainer from '../../components/movies/WatchListEmptyContainer';
-import {useEffect} from 'react';
+import {useCallback, useEffect} from 'react';
 const WatchList = () => {
   const navigation =
     useNavigation<NavigationProp<RootStackType, 'WatchList'>>();
@@ -28,20 +28,22 @@ const WatchList = () => {
   const {loading, movies, getWatchlist} = useWatchlist();
   const isFocused = useIsFocused();
 
-  const renderMovies = (movie: Movie, index: number) => {
-    return (
-      <MovieCard
-        testID={'card_movie' + index.toString()}
-        movie={movie}
-        // navigation code
-        onMoviePress={(movie_id: number) =>
-          navigation.navigate('MovieDetails', {
-            movie_id: movie_id,
-          })
-        }
-      />
-    );
-  };
+  const renderMovies = useCallback(
+    (movie: Movie, index: number) => {
+      return (
+        <MovieCard
+          testID={'card_movie' + index.toString()}
+          movie={movie}
+          onMoviePress={(movie_id: number) =>
+            navigation.navigate('MovieDetails', {
+              movie_id: movie_id,
+            })
+          }
+        />
+      );
+    },
+    [navigation],
+  );
 
   // for edge case: if user removes watchlist and come back to same screen
   useEffect(() => {
