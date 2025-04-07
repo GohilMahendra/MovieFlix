@@ -59,6 +59,8 @@ describe('Movies ...', () => {
       fireEvent.press(cards[0]);
     });
 
-    expect(mockNavigate).toHaveBeenCalled();
+    expect(mockNavigate).toHaveBeenCalledWith('MovieDetails', {
+      movie_id: expect.any(Number),
+    });
   });
 });
