@@ -9,11 +9,10 @@ A OTT app for curated Movies
 - categories with pagination
 - categories with search option
 - all states handled with hooks
-- unit tests above 90% for every component
+- unit tests above 80% for every component
 - works for both android and ios
 - add to watchlist functinality
 - modular custom hooks architecture
-- works both on android and ios
 
 # Getting Started
 
