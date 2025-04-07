@@ -13,6 +13,7 @@ A OTT app for curated Movies
 - works for both android and ios
 - add to watchlist functinality
 - modular custom hooks architecture
+- reanimated v3 for scroll and splash animations
 
 # Getting Started
 
