@@ -7,7 +7,7 @@ import {
   View,
 } from 'react-native';
 import {black, white} from '../../globals/colors';
-import {scaledVal} from '../../globals/utilities';
+import {getNumColumns, scaledVal} from '../../globals/utilities';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import {
   NavigationProp,
@@ -80,7 +80,7 @@ const WatchList = () => {
         }
         ListEmptyComponent={!loading ? <WatchListEmptyContainer /> : null}
         data={movies}
-        numColumns={3}
+        numColumns={getNumColumns()}
         keyExtractor={item => item.id.toString()}
         renderItem={({item, index}) => renderMovies(item, index)}
       />

@@ -11,8 +11,9 @@ import React from 'react';
 import {Movie} from '../../types/Movies';
 import {matt_black, white} from '../../globals/colors';
 import {MEDIA_BASE_URL} from '../../globals/constants';
-import {scaledVal} from '../../globals/utilities';
+import {getCardWidth, getNumColumns, scaledVal} from '../../globals/utilities';
 import FastImage from 'react-native-fast-image';
+import {min} from 'lodash';
 const {width} = Dimensions.get('screen');
 
 // agnostic component dont handle any business logic, just pass callback on Actions
@@ -57,7 +58,7 @@ export default React.memo(MovieCard);
 
 const styles = StyleSheet.create({
   container: {
-    width: width / 3 - 20 / 2,
+    width: getCardWidth(),
     borderRadius: scaledVal(15),
     margin: scaledVal(5),
   },

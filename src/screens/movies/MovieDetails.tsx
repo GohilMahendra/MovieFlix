@@ -52,10 +52,14 @@ const MovieDetails = () => {
 
   const imageAnimatedStyle = useAnimatedStyle(() => {
     return {
-      opacity: interpolate(scrollY.value, [0, 200, 300], [1, 0.7, 0.3]),
+      opacity: interpolate(
+        scrollY.value,
+        [0, width / 3, width / 2],
+        [1, 0.7, 0.5],
+      ),
       transform: [
         {
-          scale: interpolate(scrollY.value, [0, 300], [1, 0.9]),
+          scale: interpolate(scrollY.value, [0, width / 2], [1, 0.9]),
         },
       ],
     };

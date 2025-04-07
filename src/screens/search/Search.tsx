@@ -8,7 +8,7 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import {scaledVal} from '../../globals/utilities';
+import {getNumColumns, scaledVal} from '../../globals/utilities';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import {black, matt_black, white} from '../../globals/colors';
 import useSearch from '../../hooks/search/useSearch';
@@ -69,7 +69,7 @@ const Search = () => {
           ListEmptyComponent={() =>
             !loading && searchTerm.length > 3 && <EmptyContainer />
           }
-          numColumns={3}
+          numColumns={getNumColumns()}
           keyExtractor={item => item.id.toString()}
           renderItem={({item, index}) => renderMovies(item, index)}
         />

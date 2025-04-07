@@ -1,6 +1,6 @@
 import {Dimensions, StyleSheet} from 'react-native';
 import React from 'react';
-import {scaledVal} from '../../globals/utilities';
+import {getCardWidth, scaledVal} from '../../globals/utilities';
 import ShimmerPlaceholder from 'react-native-shimmer-placeholder';
 import LinearGradient from 'react-native-linear-gradient';
 import {View} from 'react-native';
@@ -27,7 +27,7 @@ export default React.memo(MovieCardShimmer);
 const styles = StyleSheet.create({
   container: {
     height: scaledVal(200),
-    width: width / 3 - 20 / 2,
+    width: getCardWidth(),
     borderRadius: scaledVal(15),
     margin: scaledVal(5),
   },

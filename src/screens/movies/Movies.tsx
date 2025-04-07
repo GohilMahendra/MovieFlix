@@ -18,7 +18,7 @@ import {TouchableOpacity} from 'react-native';
 import MovieCard from '../../components/movies/MovieCard';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {RootStackType} from '../../navigation/RootStack';
-import {scaledVal} from '../../globals/utilities';
+import {getNumColumns, scaledVal} from '../../globals/utilities';
 import {APP_NAME} from '../../globals/constants';
 import {useCallback, useRef} from 'react';
 import MovieCardShimmer from '../../components/shimmers/MovieCardShimmer';
@@ -131,7 +131,7 @@ const Movies = () => {
           data={movies}
           extraData={category}
           removeClippedSubviews
-          numColumns={3}
+          numColumns={getNumColumns()}
           onEndReached={() => getMoreMovies()}
           keyExtractor={item => item.id.toString()}
           renderItem={({item, index}) => renderMovies(item, index)}
@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: scaledVal(5),
     borderColor: white,
-    borderWidth: 0.2,
+    borderWidth: 0.9,
   },
   btnContainer: {
     flexDirection: 'row',
