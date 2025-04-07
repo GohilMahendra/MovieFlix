@@ -53,11 +53,13 @@ describe('search screen ...', () => {
     });
     jest.advanceTimersByTime(500);
     await waitFor(async () => {
-      const allCards = screen.root.findAllByType(MovieCard);
+      const cards = await waitFor(() =>
+        screen.findAllByTestId(/Search_MovieCard/),
+      );
 
-      const card = allCards[0];
+      const card = cards[0];
       await act(async () => {
-        card.props.onMoviePress(100);
+        fireEvent(card, 'press');
       });
       expect(mockNavigate).toHaveBeenCalled();
     });
